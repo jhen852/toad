@@ -13,8 +13,24 @@ as
     end;
     
     begin 
-        dbms_output.put_line(fun1('2 años'));
+        dbms_output.put_line(fun1('3 años'));
     end;
     
  
 select * from profesor;
+--cuantos alumnos certificados tenemos que del curso X
+create or replace function fun2(x curso.nombre%type)
+return numeric
+as 
+ var numeric;
+
+    begin
+        select count(ce.id_curso) into var
+        from certificado ce, curso c
+        where ce.id_curso=c.id_curso and c.NOMBRE=x;
+        return var;
+    end; 
+    
+begin 
+        DBMS_OUTPUT.PUT_LINE('tenemos '||'  '||fun2('Go')|| ' alumnos con certificacion del curso ' );
+end;
